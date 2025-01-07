@@ -1,5 +1,5 @@
 //
-//  Roll_dUITestsLaunchTests.swift
+//  RolldUITestsLaunchTests.swift
 //  Roll'dUITests
 //
 //  Created by Will Nixon on 12/29/24.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Roll_dUITestsLaunchTests: XCTestCase {
+final class RolldUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
