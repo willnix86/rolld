@@ -9,12 +9,13 @@ struct DiceView: View {
                     scene: getDiceScene(size: proxy.size)
                 )
             }
-        }
+        }.ignoresSafeArea(.all)
     }
 
     func getDiceScene(size: CGSize) -> SKScene {
         let scene = DiceScene(
-            size: size
+            size: size,
+            playerName: "Will"
         )
         scene.scaleMode = .aspectFit
 

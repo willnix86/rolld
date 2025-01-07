@@ -2,44 +2,121 @@ import CoreMotion
 import GameKit
 import SpriteKit
 
+enum DiceCollisionCategory: UInt32 {
+    // Values need to double each time
+    case dice = 1
+    case wall = 2
+}
+
 class DiceScene: SKScene {
-    private var dice: SKSpriteNode!
+    private var instructionLabel: SKLabelNode
+    private var dice: SKSpriteNode
+    private var playerName: String
+
     private let motionManager = CMMotionManager()
     private var isRolling = false
     private var rollingAction: SKAction?
     private var lastFaceChangeTime: TimeInterval = 0
     private var currentFaceIndex: Int = 1
+    private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private var accelerationHistory: [Double] = []
+    private let historySize = 10 // Number of samples to smooth over
+
 
 #if DEBUG
     private var stopRollingWorkItem: DispatchWorkItem?
 #endif
 
+    init(
+        size: CGSize,
+        playerName: String
+    ) {
+        self.playerName = playerName
+
+        instructionLabel = SKLabelNode(fontNamed: "Chalkduster")
+
+        let d6 = GKRandomDistribution.d6()
+        let face = d6.nextInt()
+        dice = SKSpriteNode(imageNamed: "dice_result_orthographic_0\(face)")
+
+        super.init(size: size)
+    }
+    
     override func didMove(to view: SKView) {
-        backgroundColor = .white
-        setupDice()
+        backgroundColor = Colors.orange.uiColor
+        hapticGenerator.prepare()
+
         setupPhysics()
+
+        presentInstructions()
+        presentDice()
+
         startShakeDetection()
 
 #if DEBUG
-        // Add tap gesture recognizer in DEBUG mode
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(simulateShake))
         view.addGestureRecognizer(tapGesture)
 #endif
     }
 
-    private func setupDice() {
-        dice = SKSpriteNode(imageNamed: "dice_result_orthographic_01")
-        dice.size = CGSize(width: 100, height: 100)
+    private func presentInstructions() {
+        instructionLabel.text = "\(playerName), let's roll!"
+        instructionLabel.fontSize = 28
+        instructionLabel.fontColor = Colors.red.uiColor
+        instructionLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+
+        addChild(instructionLabel)
+    }
+
+    private func presentNextSteps() {
+        let moveDiceToCenter = SKAction.move(
+            to: CGPoint(x: frame.midX, y: (frame.midY + 100)),
+            duration: 0.25
+        )
+
+        dice.run(moveDiceToCenter)
+
+        instructionLabel.text = "Drumroll please..."
+        instructionLabel.fontSize = 28
+        instructionLabel.fontColor = Colors.red.uiColor
+        instructionLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+
+        addChild(instructionLabel)
+    }
+
+    private func presentDice() {
+        dice.size = CGSize(width: 150, height: 150)
         dice.position = CGPoint(x: size.width / 2, y: size.height / 2)
+
         dice.physicsBody = SKPhysicsBody(rectangleOf: dice.size)
         dice.physicsBody?.affectedByGravity = false
         dice.physicsBody?.allowsRotation = true
+        dice.physicsBody?.restitution = 0.5
+
+        // Assign category and contact bit masks
+        dice.physicsBody?.categoryBitMask = DiceCollisionCategory.dice.rawValue
+        dice.physicsBody?.contactTestBitMask = DiceCollisionCategory.wall.rawValue
 
         addChild(dice)
     }
 
     private func setupPhysics() {
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        physicsWorld.contactDelegate = self
+
+        let wallBody = SKPhysicsBody(
+            edgeLoopFrom: CGRect(
+                x: -35,
+                y: 0,
+                width: frame.width + 70,
+                height: frame.height
+            )
+        )
+
+        // Assign category and contact bit masks
+        wallBody.categoryBitMask = DiceCollisionCategory.wall.rawValue
+        wallBody.contactTestBitMask = DiceCollisionCategory.dice.rawValue
+
+        physicsBody = wallBody
     }
 
     private func startShakeDetection() {
@@ -47,8 +124,20 @@ class DiceScene: SKScene {
         motionManager.accelerometerUpdateInterval = 0.1
         motionManager.startAccelerometerUpdates(to: .main) { [weak self] data, _ in
             guard let self = self, let acceleration = data?.acceleration else { return }
-            let threshold: Double = 2.0
-            let isShaking = abs(acceleration.x) > threshold || abs(acceleration.y) > threshold || abs(acceleration.z) > threshold
+
+            // Compute the magnitude of acceleration
+            let magnitude = sqrt(pow(acceleration.x, 2) + pow(acceleration.y, 2) + pow(acceleration.z, 2))
+
+            self.accelerationHistory.append(magnitude)
+            if self.accelerationHistory.count > self.historySize {
+                self.accelerationHistory.removeFirst()
+            }
+
+            // Compute rolling average
+            let rollingAverage = self.accelerationHistory.reduce(0, +) / Double(self.accelerationHistory.count)
+
+            let shakeThreshold: Double = 1.5
+            let isShaking = rollingAverage > shakeThreshold
 
             switch (isShaking, self.isRolling) {
             case (true, false):
@@ -57,14 +146,13 @@ class DiceScene: SKScene {
             case (true, true):
                 self.continueRollingDice()
             case (false, true):
-                self.stopRollingDice()
+                self.handleStopRolling()
             default: break
             }
         }
     }
 
     private func applyImpulseToDice() {
-        // Adjust this value for speed (higher = faster)
         let impulseMagnitude: CGFloat = 1000
 
         var dx = CGFloat.random(in: -impulseMagnitude...impulseMagnitude)
@@ -78,11 +166,10 @@ class DiceScene: SKScene {
         }
 
         // Amplify current velocity to ensure consistent movement
-        let velocityMultiplier: CGFloat = 1.5 // Adjust this to control sustained speed
+        let velocityMultiplier: CGFloat = 1.5
         dx += currentVelocity.dx * velocityMultiplier
         dy += currentVelocity.dy * velocityMultiplier
 
-        // Apply the amplified impulse
         dice.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
         dice.physicsBody?.applyAngularImpulse(0.5)
     }
@@ -92,38 +179,35 @@ class DiceScene: SKScene {
 
         // Calculate the dice speed
         let speed = dice.physicsBody?.velocity.length() ?? 0.1
-        let horizontalVelocity = dice.physicsBody?.velocity.dx ?? 0 // Horizontal velocity
+        let horizontalVelocity = dice.physicsBody?.velocity.dx ?? 0
 
-        // Dynamically adjust maxSpeed based on observed maximum
-        let maxSpeed: CGFloat = 2600 // Match your observed peak speeds
+        let maxSpeed: CGFloat = 2600
 
         // Normalize speed to [0, 1] range
         let normalizedSpeed = min(max(speed / maxSpeed, 0), 1)
 
         // Map normalized speed to the interval range
-        let minInterval: TimeInterval = 0.1 // Fastest interval
-        let maxInterval: TimeInterval = 0.5 // Slowest interval
+        let minInterval: TimeInterval = 0.05 // Fastest interval
+        let maxInterval: TimeInterval = 0.5  // Slowest interval
         let interval = maxInterval - (normalizedSpeed * (maxInterval - minInterval))
 
         // Check if enough time has passed to update the dice face
         if currentTime - lastFaceChangeTime >= interval {
             // Update the dice face sequentially based on direction
             if horizontalVelocity > 0 {
-                // Moving right: Increment face index
                 currentFaceIndex += 1
                 if currentFaceIndex > 7 {
-                    currentFaceIndex = 1 // Wrap around
+                    currentFaceIndex = 1
                 }
             } else if horizontalVelocity < 0 {
-                // Moving left: Decrement face index
                 currentFaceIndex -= 1
                 if currentFaceIndex < 1 {
-                    currentFaceIndex = 7 // Wrap around
+                    currentFaceIndex = 7
                 }
             }
 
-            // Update the dice texture
             dice.texture = SKTexture(imageNamed: "dice_animation_0\(currentFaceIndex)")
+            hapticGenerator.impactOccurred()
 
             // Record the time of this face change
             lastFaceChangeTime = currentTime
@@ -131,22 +215,45 @@ class DiceScene: SKScene {
     }
 
     private func continueRollingDice() {
+        instructionLabel.removeFromParent()
+        
         applyImpulseToDice()
+    }
+
+    private func handleStopRolling() {
+        guard stopRollingWorkItem == nil else {
+            return
+        }
+
+        let newWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+
+            if self.isRolling {
+                self.stopRollingDice()
+            }
+
+            self.stopRollingWorkItem = nil
+        }
+
+        stopRollingWorkItem = newWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: newWorkItem)
     }
 
     private func stopRollingDice() {
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
-        dice.texture = SKTexture(imageNamed: "dice_result_orthographic_0\(face)")
 
-        // Stop the rolling action
+        dice.texture = SKTexture(imageNamed: "dice_result_orthographic_0\(face)")
+        hapticGenerator.impactOccurred()
+
         self.isRolling = false
 
-        // Stop physics motion
         dice.physicsBody?.velocity = .zero
         dice.physicsBody?.angularVelocity = 0
 
         dice.zRotation = 0
+
+        presentNextSteps()
     }
 
 #if DEBUG
@@ -158,22 +265,14 @@ class DiceScene: SKScene {
             continueRollingDice()
         }
 
-        // Cancel any previously scheduled stopRolling
-        stopRollingWorkItem?.cancel()
-
-        // Schedule a new stopRolling action after 5 seconds of inactivity
-        let newWorkItem = DispatchWorkItem { [weak self] in
-            self?.stopRollingDice()
-        }
-        stopRollingWorkItem = newWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: newWorkItem)
+        handleStopRolling()
     }
 #endif
 
     override func willMove(from view: SKView) {
         motionManager.stopAccelerometerUpdates()
+
 #if DEBUG
-        // Remove the gesture recognizer in DEBUG mode
         if let gestures = view.gestureRecognizers {
             for gesture in gestures {
                 view.removeGestureRecognizer(gesture)
@@ -181,10 +280,21 @@ class DiceScene: SKScene {
         }
 #endif
     }
+
+    @available(*, unavailable)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
-extension CGVector {
-    func length() -> CGFloat {
-        return sqrt(dx * dx + dy * dy)
+extension DiceScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        // Retrieve the nodes involved in the collision
+        let nodeA = contact.bodyA.node
+        let nodeB = contact.bodyB.node
+
+        if nodeA == dice || nodeB == dice {
+            hapticGenerator.impactOccurred()
+        }
     }
 }
