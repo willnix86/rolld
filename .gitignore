@@ -1,0 +1,68 @@
+# --- macOS ---
+.DS_Store
+
+# --- Xcode ---
+*.xcworkspace
+!default.xcworkspace/contents.xcworkspacedata
+!default.xcworkspace/contents.xcworkspacedata/*
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+
+# --- Swift Package Manager ---
+.swiftpm
+Package.resolved
+
+# --- CocoaPods ---
+Pods/
+Podfile.lock
+
+# --- Carthage ---
+Carthage/Build/
+Carthage/Checkouts/
+
+# --- Fastlane ---
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# --- Xcode Breakpoints ---
+*.xcdebugger/
+
+# --- Code Coverage ---
+*.xccoverage
+
+# --- Temporary or Generated Files ---
+*.mode1v3
+*.pbxuser
+*.perspectivev3
+*.idea/
+*.moved-aside
+*.hmap
+*.ipa
+*.xcfilelist
+*.xcassets/.DS_Store
+
+# --- Playgrounds ---
+timeline.xctimeline
+playground.xcworkspace
+
+# --- Localization ---
+*.strings.old
+*.stringsdict.old
+
+# --- Core Data ---
+*.xccurrentversion
+
+# --- SwiftLint ---
+.swiftlint.yml
+
+# --- Logs ---
+*.log
+
+# --- Backup Files ---
+*~.nib
+*.swp
+*.swo

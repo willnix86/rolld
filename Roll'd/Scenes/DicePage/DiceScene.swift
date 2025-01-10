@@ -10,15 +10,15 @@ enum DiceCollisionCategory: UInt32 {
 
 class DiceScene: SKScene {
     private var instructionLabel: SKLabelNode
+    private var challengeLabel: SKLabelNode
     private var dice: SKSpriteNode
     private var playerName: String
 
-    private let motionManager = CMMotionManager()
+    private var needsManualReset = false
     private var isRolling = false
     private var rollingAction: SKAction?
     private var lastFaceChangeTime: TimeInterval = 0
     private var currentFaceIndex: Int = 1
-    private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
     private var accelerationHistory: [Double] = []
     private let historySize = 10 // Number of samples to smooth over
 
@@ -27,23 +27,28 @@ class DiceScene: SKScene {
     private var stopRollingWorkItem: DispatchWorkItem?
 #endif
 
+    private let motionManager = CMMotionManager()
+    private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+
     init(
         size: CGSize,
         playerName: String
     ) {
         self.playerName = playerName
 
-        instructionLabel = SKLabelNode(fontNamed: "Chalkduster")
+        self.instructionLabel = SKLabelNode(fontNamed: "Chalkduster")
+        self.challengeLabel = SKLabelNode(fontNamed: "Chalkduster")
 
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
-        dice = SKSpriteNode(imageNamed: "dice_result_orthographic_0\(face)")
+        self.dice = SKSpriteNode(imageNamed: "dice_result_orthographic_0\(face)")
 
         super.init(size: size)
+
+        self.backgroundColor = Colors.orange.uiColor
     }
     
     override func didMove(to view: SKView) {
-        backgroundColor = Colors.orange.uiColor
         hapticGenerator.prepare()
 
         setupPhysics()
@@ -63,23 +68,7 @@ class DiceScene: SKScene {
         instructionLabel.text = "\(playerName), let's roll!"
         instructionLabel.fontSize = 28
         instructionLabel.fontColor = Colors.red.uiColor
-        instructionLabel.position = CGPoint(x: frame.midX, y: frame.midY)
-
-        addChild(instructionLabel)
-    }
-
-    private func presentNextSteps() {
-        let moveDiceToCenter = SKAction.move(
-            to: CGPoint(x: frame.midX, y: (frame.midY + 100)),
-            duration: 0.25
-        )
-
-        dice.run(moveDiceToCenter)
-
-        instructionLabel.text = "Drumroll please..."
-        instructionLabel.fontSize = 28
-        instructionLabel.fontColor = Colors.red.uiColor
-        instructionLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        instructionLabel.position = CGPoint(x: frame.midX, y: frame.height / 3)
 
         addChild(instructionLabel)
     }
@@ -91,7 +80,6 @@ class DiceScene: SKScene {
         dice.physicsBody = SKPhysicsBody(rectangleOf: dice.size)
         dice.physicsBody?.affectedByGravity = false
         dice.physicsBody?.allowsRotation = true
-        dice.physicsBody?.restitution = 0.5
 
         // Assign category and contact bit masks
         dice.physicsBody?.categoryBitMask = DiceCollisionCategory.dice.rawValue
@@ -175,8 +163,30 @@ class DiceScene: SKScene {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        guard isRolling else { return }
+        guard isRolling, !needsManualReset else { return }
 
+        // Ensure dice stays within bounds
+       let diceMinX = dice.size.width / 2
+       let diceMaxX = size.width - dice.size.width / 2
+       let diceMinY = dice.size.height / 2
+       let diceMaxY = size.height - dice.size.height / 2
+
+       if dice.position.x < diceMinX {
+           dice.position.x = diceMinX
+       } else if dice.position.x > diceMaxX {
+           dice.position.x = diceMaxX
+       }
+
+       if dice.position.y < diceMinY {
+           dice.position.y = diceMinY
+       } else if dice.position.y > diceMaxY {
+           dice.position.y = diceMaxY
+       }
+
+        updateDiceTexture(with: currentTime)
+    }
+
+    private func updateDiceTexture(with currentTime: TimeInterval) {
         // Calculate the dice speed
         let speed = dice.physicsBody?.velocity.length() ?? 0.1
         let horizontalVelocity = dice.physicsBody?.velocity.dx ?? 0
@@ -215,13 +225,18 @@ class DiceScene: SKScene {
     }
 
     private func continueRollingDice() {
+        guard !needsManualReset else { return }
+
         instructionLabel.removeFromParent()
-        
+
+        stopRollingWorkItem?.cancel() // Cancel any scheduled stop
+        stopRollingWorkItem = nil
+
         applyImpulseToDice()
     }
 
     private func handleStopRolling() {
-        guard stopRollingWorkItem == nil else {
+        guard stopRollingWorkItem == nil, !needsManualReset else {
             return
         }
 
@@ -246,7 +261,8 @@ class DiceScene: SKScene {
         dice.texture = SKTexture(imageNamed: "dice_result_orthographic_0\(face)")
         hapticGenerator.impactOccurred()
 
-        self.isRolling = false
+        isRolling = false
+        needsManualReset = true
 
         dice.physicsBody?.velocity = .zero
         dice.physicsBody?.angularVelocity = 0
@@ -254,6 +270,29 @@ class DiceScene: SKScene {
         dice.zRotation = 0
 
         presentNextSteps()
+    }
+
+    private func presentNextSteps() {
+        let moveDiceToCenter = SKAction.move(
+            to: CGPoint(x: frame.midX, y: frame.midY),
+            duration: 0.25
+        )
+
+        dice.run(moveDiceToCenter)
+
+        instructionLabel.text = "Drumroll please..."
+        instructionLabel.fontSize = 28
+        instructionLabel.fontColor = Colors.red.uiColor
+
+        addChild(instructionLabel)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.presentChallenge()
+        }
+    }
+
+    private func presentChallenge() {
+        
     }
 
 #if DEBUG
