@@ -2,20 +2,22 @@ import SwiftUI
 import SpriteKit
 
 struct DiceView: View {
+    var playerName: String
+
     var body: some View {
         GeometryReader { proxy in
             VStack {
                 SpriteView(
-                    scene: getDiceScene(size: proxy.size)
+                    scene: getScene(size: proxy.size)
                 )
             }
         }.ignoresSafeArea(.all)
     }
 
-    func getDiceScene(size: CGSize) -> SKScene {
+    func getScene(size: CGSize) -> SKScene {
         let scene = DiceScene(
             size: size,
-            playerName: "Will"
+            playerName: playerName
         )
         scene.scaleMode = .aspectFit
 
