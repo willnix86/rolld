@@ -8,7 +8,6 @@ final class RouletteWheelViewModel: ObservableObject {
     @Published var isSpinning = false
     @Published var winningItem: String = ""
     @Published var showAlert = false
-    @Published var navigateToDiceView = false
     @Published var usedColors: [Color] = [.blue]
     @Published var colors: [Color] = [.gray.opacity(0.3)]
     @Published var usedColorNames: [Color] = [.blue]
@@ -95,9 +94,5 @@ final class RouletteWheelViewModel: ObservableObject {
             lastUsedColor = firstColor
             names.append(name)
         }
-    }
-
-    func startChallenge() {
-        navigateToDiceView = true
     }
 }

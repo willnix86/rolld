@@ -13,6 +13,8 @@ class DiceScene: SKScene {
     private var challengeLabel: SKLabelNode
     private var dice: SKSpriteNode
     private var playerName: String
+    private var dares: [String]
+    private var selectedFaceIndex: Int = 1
 
     private var needsManualReset = false
     private var isRolling = false
@@ -30,14 +32,20 @@ class DiceScene: SKScene {
     private let motionManager = CMMotionManager()
     private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
+    private let onDareSelected: (String) -> Void
+
     init(
         size: CGSize,
-        playerName: String
+        playerName: String,
+        dares: [String],
+        onDareSelected: @escaping (String) -> Void
     ) {
         self.playerName = playerName
+        self.dares = dares
+        self.onDareSelected = onDareSelected
 
-        self.instructionLabel = SKLabelNode(fontNamed: "Chalkduster")
-        self.challengeLabel = SKLabelNode(fontNamed: "Chalkduster")
+        self.instructionLabel = SKLabelNode()
+        self.challengeLabel = SKLabelNode()
 
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
@@ -257,6 +265,7 @@ class DiceScene: SKScene {
     private func stopRollingDice() {
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
+        selectedFaceIndex = face
 
         dice.texture = SKTexture(imageNamed: "dice_result_orthographic_0\(face)")
         hapticGenerator.impactOccurred()
@@ -286,13 +295,33 @@ class DiceScene: SKScene {
 
         addChild(instructionLabel)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            guard let self = self else { return }
+
+            self.instructionLabel.removeFromParent()
+
             self.presentChallenge()
         }
     }
 
     private func presentChallenge() {
-        
+        let text = dares[selectedFaceIndex - 1]
+
+        onDareSelected(text)
+//        let dareLabel = SKLabelNode()
+//
+//        dareLabel.text = text
+//        dareLabel.fontSize = 28
+//        dareLabel.verticalAlignmentMode = .center
+//        dareLabel.fontColor = Colors.red.uiColor
+//        dareLabel.position = CGPoint(x: frame.midX, y: frame.height / 3)
+//        addChild(dareLabel)
+
+//        let dare = dareLabel.multilined()
+//        dare.position = CGPoint(x: frame.midX, y: frame.height / 3)
+//        dare.zPosition = 1001  // On top of all other nodes
+
+//        addChild(dare)
     }
 
 #if DEBUG

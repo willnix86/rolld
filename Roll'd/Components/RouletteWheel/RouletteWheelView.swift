@@ -4,6 +4,8 @@ struct RouletteWheelView: View {
     @State var radius: CGFloat = 0
     @StateObject var vm = RouletteWheelViewModel()
 
+    var navigateToNextPage: (String) -> Void
+
     var body: some View {
         VStack {
             GeometryReader { geo in
@@ -96,7 +98,7 @@ struct RouletteWheelView: View {
                 isPresented: $vm.showAlert,
                 actions: {
                     Button("I'm ready!") {
-                        vm.startChallenge()
+                        navigateToNextPage(vm.winningItem)
                     }
                 },
                 message: {
@@ -104,17 +106,13 @@ struct RouletteWheelView: View {
                 }
             )
         }
-        .onAppear {
-            // TODO: Remove dummy names!
-            ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
-                vm.newColorName = $0
-                vm.addNewItem()
-            }
-        }
-        .navigationDestination(isPresented: $vm.navigateToDiceView) {
-            DiceView(playerName: vm.winningItem)
-                .navigationBarBackButtonHidden()
-        }
+//        .onAppear {
+//            // TODO: Remove dummy names!
+//            ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
+//                vm.newColorName = $0
+//                vm.addNewItem()
+//            }
+//        }
     }
 
     func angleForSegment(_ index: Int) -> Angle {
@@ -128,5 +126,5 @@ struct RouletteWheelView: View {
 }
 
 #Preview {
-    RouletteWheelView()
+    RouletteWheelView() { _ in }
 }
