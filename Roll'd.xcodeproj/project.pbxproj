@@ -3,79 +3,107 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 56;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		04F888ACD21C2B54D5318D07 /* ArrowIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A9DE0ABB7764FA770C0ED1 /* ArrowIndicator.swift */; };
+		0F86A497B79431A233625B19 /* TuistAssets+Rolld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A8BF5C88FB472622D67B9 /* TuistAssets+Rolld.swift */; };
+		1651B95E65EBE67AFE53A549 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04E9B76873DE38DD058CC2B /* UIColor+Extensions.swift */; };
+		1CC3FBA9D3EE6EAA164F78D5 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C3F4E3BDC9AAA0C4299409 /* NavigationCoordinator.swift */; };
+		23418166615BEF548619DC9A /* DareSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94483DC57DEAA0C8511B5F1C /* DareSelectionViewModel.swift */; };
+		268A836377C8BCC374208B11 /* DareSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69392AEFAABDCE3FE7459A82 /* DareSelectionView.swift */; };
+		285EE658F923370627466D37 /* DareResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1E22AC9C4638887FCCCA05 /* DareResultView.swift */; };
+		2EC221A7333CC406D3FBF747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A367B844E08544D9DCFE4093 /* Preview Assets.xcassets */; };
+		2F77C7FF25DD7D5831C9109F /* RouletteWheelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A222F85F109F4701DD037A /* RouletteWheelViewModel.swift */; };
+		3AB111EEB8BFF7D1C89CE127 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F4628DA6058A5599DF9465 /* HomePage.swift */; };
+		4C2611032E503BB085B824DE /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE510AC9B43AD02937B907F /* Colors.swift */; };
+		51D527D3088FF9B34D0ABB79 /* RolldApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC80CDDD9FB035DD671C156 /* RolldApp.swift */; };
+		5405A08ED52EDE3C97FF7040 /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D074E9156DD78127AFC8E4FD /* Screens.swift */; };
+		6AB4014E3103C23BFCAEC310 /* DiceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271DD4C7B5A0A10DF10D5C08 /* DiceScene.swift */; };
+		72713DFF14847F7E37A50DBD /* CGVector+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62EE2424393F29AFD2B77B37 /* CGVector+Extensions.swift */; };
+		7703301F781C80F360913C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3BA1588A615BF1BFC25886F /* Assets.xcassets */; };
+		AFCAA7514127A7F5CB970F70 /* PlayerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3C5C568E5BE085E60FDC1E /* PlayerSelectionView.swift */; };
+		B420F4C48BA377DDBDD6006E /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4426932558D70142F0ABC8D /* Color+Extensions.swift */; };
+		C055A01FF07FD54F6A3C5012 /* DiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6CFC715548106032C4F388 /* DiceView.swift */; };
+		C65C3983637758580D2D9C9E /* RouletteWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D52F4CD5BF713AA8F42CC2 /* RouletteWheelView.swift */; };
+		D2E5667C28A01BC7C36074A9 /* TuistBundle+Rolld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BF0C23051787812A1FA1AA /* TuistBundle+Rolld.swift */; };
+		DEB22D362492FEA34D018BB7 /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC1A1F326602270D48D7C1E /* Segment.swift */; };
+		EC63F090A12254434C6F9F83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E032C6858F6A97AE97C4B66 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
-		C6997F902D21E34B009B0811 /* PBXContainerItemProxy */ = {
+		114579BA5EFA6E5D09010702 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C6997F732D21E34A009B0811 /* Project object */;
+			containerPortal = 3E9268166C3DA9D6A4894EAA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = C6997F7A2D21E34A009B0811;
-			remoteInfo = "Roll'd";
-		};
-		C6997F9A2D21E34B009B0811 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C6997F732D21E34A009B0811 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C6997F7A2D21E34A009B0811;
-			remoteInfo = "Roll'd";
+			remoteGlobalIDString = AF7C02EDF57B9D92F185CA82;
+			remoteInfo = Rolld;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2A98945BB6C623E7C21896DD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFCE729FFED4A881A1CC32F4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		C6997F7B2D21E34A009B0811 /* Roll'd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Roll'd.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6997F8F2D21E34B009B0811 /* Roll'dTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Roll'dTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6997F992D21E34B009B0811 /* Roll'dUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Roll'dUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0EE510AC9B43AD02937B907F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		271DD4C7B5A0A10DF10D5C08 /* DiceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceScene.swift; sourceTree = "<group>"; };
+		2FC1A1F326602270D48D7C1E /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		443A8BF5C88FB472622D67B9 /* TuistAssets+Rolld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+Rolld.swift"; sourceTree = "<group>"; };
+		53D52F4CD5BF713AA8F42CC2 /* RouletteWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteWheelView.swift; sourceTree = "<group>"; };
+		5B6CFC715548106032C4F388 /* DiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceView.swift; sourceTree = "<group>"; };
+		62C3F4E3BDC9AAA0C4299409 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
+		62EE2424393F29AFD2B77B37 /* CGVector+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGVector+Extensions.swift"; sourceTree = "<group>"; };
+		69392AEFAABDCE3FE7459A82 /* DareSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DareSelectionView.swift; sourceTree = "<group>"; };
+		6A3C5C568E5BE085E60FDC1E /* PlayerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSelectionView.swift; sourceTree = "<group>"; };
+		7E032C6858F6A97AE97C4B66 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89BF0C23051787812A1FA1AA /* TuistBundle+Rolld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+Rolld.swift"; sourceTree = "<group>"; };
+		94483DC57DEAA0C8511B5F1C /* DareSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DareSelectionViewModel.swift; sourceTree = "<group>"; };
+		9FEF861345D9AA77F96B8AF3 /* Rolld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rolld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04E9B76873DE38DD058CC2B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		A367B844E08544D9DCFE4093 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AAC80CDDD9FB035DD671C156 /* RolldApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RolldApp.swift; sourceTree = "<group>"; };
+		B1E8BAF1861A3EEF94DF52C8 /* Rolld-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Rolld-Info.plist"; sourceTree = "<group>"; };
+		B4426932558D70142F0ABC8D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		B4F4628DA6058A5599DF9465 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		D074E9156DD78127AFC8E4FD /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
+		E6A9DE0ABB7764FA770C0ED1 /* ArrowIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowIndicator.swift; sourceTree = "<group>"; };
+		E7A222F85F109F4701DD037A /* RouletteWheelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteWheelViewModel.swift; sourceTree = "<group>"; };
+		EB1E22AC9C4638887FCCCA05 /* DareResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DareResultView.swift; sourceTree = "<group>"; };
+		F170D800E16426AD331CBAB4 /* RolldUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RolldUnitTests-Info.plist"; sourceTree = "<group>"; };
+		F3BA1588A615BF1BFC25886F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FAEB13D7B76FA609FF4634DD /* RolldUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RolldUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C6997FA12D21E34B009B0811 /* Exceptions for "Roll'd" folder in "Roll'd" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/Info.plist,
-			);
-			target = C6997F7A2D21E34A009B0811 /* Roll'd */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		C6997F7D2D21E34A009B0811 /* Roll'd */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				C6997FA12D21E34B009B0811 /* Exceptions for "Roll'd" folder in "Roll'd" target */,
-			);
-			path = "Roll'd";
-			sourceTree = "<group>";
-		};
-		C6997F922D21E34B009B0811 /* Roll'dTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Roll'dTests";
-			sourceTree = "<group>";
-		};
-		C6997F9C2D21E34B009B0811 /* Roll'dUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Roll'dUITests";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		C6997F782D21E34A009B0811 /* Frameworks */ = {
+		126D134CED3E635C65B7D009 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6997F8C2D21E34B009B0811 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6997F962D21E34B009B0811 /* Frameworks */ = {
+		6AEAAAA61ADE1DB47B04F41D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -85,299 +113,378 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C6997F722D21E34A009B0811 = {
+		017062D20BD6DE8EE79C9BEE /* DareResult */ = {
 			isa = PBXGroup;
 			children = (
-				C6997F7D2D21E34A009B0811 /* Roll'd */,
-				C6997F922D21E34B009B0811 /* Roll'dTests */,
-				C6997F9C2D21E34B009B0811 /* Roll'dUITests */,
-				C6997F7C2D21E34A009B0811 /* Products */,
+				EB1E22AC9C4638887FCCCA05 /* DareResultView.swift */,
+			);
+			path = DareResult;
+			sourceTree = "<group>";
+		};
+		05371E150CBEFBADA658BC56 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1E782D2410D6C9F7103B3564 /* Components */,
+				795C79C543AFCA2738F5547A /* Constants */,
+				BA15909E1505AC04FDB6DEB3 /* Coordinator */,
+				2BE3FFCA40401F0306C085B4 /* Extensions */,
+				124F0270D70B415CE6D8D71A /* Scenes */,
+				AAC80CDDD9FB035DD671C156 /* RolldApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		0D0FB3C38E97452787FF2E4A /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				B1E8BAF1861A3EEF94DF52C8 /* Rolld-Info.plist */,
+				F170D800E16426AD331CBAB4 /* RolldUnitTests-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		124F0270D70B415CE6D8D71A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				017062D20BD6DE8EE79C9BEE /* DareResult */,
+				D67405C13719AE76818AB095 /* DareSelection */,
+				F78B97BBD58A8D6EDD714A4D /* DicePage */,
+				4EC343A4AABD63D8FCC3D74F /* PlayerSelection */,
+				B4F4628DA6058A5599DF9465 /* HomePage.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1E782D2410D6C9F7103B3564 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				653B9E25E3F9D48525263D92 /* RouletteWheel */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		253B670703826BFF299D21D1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1CC394A69AA5B7B19E844F0 /* Preview Content */,
+				F3BA1588A615BF1BFC25886F /* Assets.xcassets */,
+				7E032C6858F6A97AE97C4B66 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2BE3FFCA40401F0306C085B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				62EE2424393F29AFD2B77B37 /* CGVector+Extensions.swift */,
+				B4426932558D70142F0ABC8D /* Color+Extensions.swift */,
+				A04E9B76873DE38DD058CC2B /* UIColor+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		45A6AC6FB8C70CC7EA9A4865 /* Rolld */ = {
+			isa = PBXGroup;
+			children = (
+				253B670703826BFF299D21D1 /* Resources */,
+				05371E150CBEFBADA658BC56 /* Sources */,
+			);
+			path = Rolld;
+			sourceTree = "<group>";
+		};
+		4EC343A4AABD63D8FCC3D74F /* PlayerSelection */ = {
+			isa = PBXGroup;
+			children = (
+				6A3C5C568E5BE085E60FDC1E /* PlayerSelectionView.swift */,
+			);
+			path = PlayerSelection;
+			sourceTree = "<group>";
+		};
+		653B9E25E3F9D48525263D92 /* RouletteWheel */ = {
+			isa = PBXGroup;
+			children = (
+				9CC50D357FEBC93AA21BFBB3 /* Views */,
+				53D52F4CD5BF713AA8F42CC2 /* RouletteWheelView.swift */,
+				E7A222F85F109F4701DD037A /* RouletteWheelViewModel.swift */,
+			);
+			path = RouletteWheel;
+			sourceTree = "<group>";
+		};
+		795C79C543AFCA2738F5547A /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				0EE510AC9B43AD02937B907F /* Colors.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		98ED4A5A546E17C63F3DA78D = {
+			isa = PBXGroup;
+			children = (
+				B238C62D753A70657D3BD814 /* Project */,
+				B37D99355A73E0C7BBAB50A0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C6997F7C2D21E34A009B0811 /* Products */ = {
+		9CC50D357FEBC93AA21BFBB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C6997F7B2D21E34A009B0811 /* Roll'd.app */,
-				C6997F8F2D21E34B009B0811 /* Roll'dTests.xctest */,
-				C6997F992D21E34B009B0811 /* Roll'dUITests.xctest */,
+				E6A9DE0ABB7764FA770C0ED1 /* ArrowIndicator.swift */,
+				2FC1A1F326602270D48D7C1E /* Segment.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A1C6523565A3790D28162234 /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				0D0FB3C38E97452787FF2E4A /* InfoPlists */,
+				FC391D1D4E075DF5E14A7115 /* Sources */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+		A1CC394A69AA5B7B19E844F0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A367B844E08544D9DCFE4093 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B238C62D753A70657D3BD814 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				A1C6523565A3790D28162234 /* Derived */,
+				45A6AC6FB8C70CC7EA9A4865 /* Rolld */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		B37D99355A73E0C7BBAB50A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9FEF861345D9AA77F96B8AF3 /* Rolld.app */,
+				FAEB13D7B76FA609FF4634DD /* RolldUnitTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BA15909E1505AC04FDB6DEB3 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				62C3F4E3BDC9AAA0C4299409 /* NavigationCoordinator.swift */,
+				D074E9156DD78127AFC8E4FD /* Screens.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D67405C13719AE76818AB095 /* DareSelection */ = {
+			isa = PBXGroup;
+			children = (
+				69392AEFAABDCE3FE7459A82 /* DareSelectionView.swift */,
+				94483DC57DEAA0C8511B5F1C /* DareSelectionViewModel.swift */,
+			);
+			path = DareSelection;
+			sourceTree = "<group>";
+		};
+		F78B97BBD58A8D6EDD714A4D /* DicePage */ = {
+			isa = PBXGroup;
+			children = (
+				271DD4C7B5A0A10DF10D5C08 /* DiceScene.swift */,
+				5B6CFC715548106032C4F388 /* DiceView.swift */,
+			);
+			path = DicePage;
+			sourceTree = "<group>";
+		};
+		FC391D1D4E075DF5E14A7115 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				443A8BF5C88FB472622D67B9 /* TuistAssets+Rolld.swift */,
+				89BF0C23051787812A1FA1AA /* TuistBundle+Rolld.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C6997F7A2D21E34A009B0811 /* Roll'd */ = {
+		40F8B663333D26E29187D8DA /* RolldUnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C6997FA22D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'd" */;
+			buildConfigurationList = 8F225890C5041A1B0956EC81 /* Build configuration list for PBXNativeTarget "RolldUnitTests" */;
 			buildPhases = (
-				C6997F772D21E34A009B0811 /* Sources */,
-				C6997F782D21E34A009B0811 /* Frameworks */,
-				C6997F792D21E34A009B0811 /* Resources */,
+				567C80B2F0A2F6BDD34830D8 /* Sources */,
+				F25ABB18431DC18CAF5010E9 /* Resources */,
+				6AEAAAA61ADE1DB47B04F41D /* Frameworks */,
+				2A98945BB6C623E7C21896DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				54207A97F3BFED6883F6A44A /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				C6997F7D2D21E34A009B0811 /* Roll'd */,
-			);
-			name = "Roll'd";
+			name = RolldUnitTests;
 			packageProductDependencies = (
 			);
-			productName = "Roll'd";
-			productReference = C6997F7B2D21E34A009B0811 /* Roll'd.app */;
-			productType = "com.apple.product-type.application";
-		};
-		C6997F8E2D21E34B009B0811 /* Roll'dTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C6997FA72D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'dTests" */;
-			buildPhases = (
-				C6997F8B2D21E34B009B0811 /* Sources */,
-				C6997F8C2D21E34B009B0811 /* Frameworks */,
-				C6997F8D2D21E34B009B0811 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C6997F912D21E34B009B0811 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C6997F922D21E34B009B0811 /* Roll'dTests */,
-			);
-			name = "Roll'dTests";
-			packageProductDependencies = (
-			);
-			productName = "Roll'dTests";
-			productReference = C6997F8F2D21E34B009B0811 /* Roll'dTests.xctest */;
+			productName = RolldUnitTests;
+			productReference = FAEB13D7B76FA609FF4634DD /* RolldUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C6997F982D21E34B009B0811 /* Roll'dUITests */ = {
+		AF7C02EDF57B9D92F185CA82 /* Rolld */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C6997FAA2D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'dUITests" */;
+			buildConfigurationList = 4E4C2A902711C8EF615F908E /* Build configuration list for PBXNativeTarget "Rolld" */;
 			buildPhases = (
-				C6997F952D21E34B009B0811 /* Sources */,
-				C6997F962D21E34B009B0811 /* Frameworks */,
-				C6997F972D21E34B009B0811 /* Resources */,
+				8D677CD38C9CB784AF9547CE /* Sources */,
+				FE0B739BFD300AE74BE61BF4 /* Resources */,
+				126D134CED3E635C65B7D009 /* Frameworks */,
+				FFCE729FFED4A881A1CC32F4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C6997F9B2D21E34B009B0811 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				C6997F9C2D21E34B009B0811 /* Roll'dUITests */,
-			);
-			name = "Roll'dUITests";
+			name = Rolld;
 			packageProductDependencies = (
 			);
-			productName = "Roll'dUITests";
-			productReference = C6997F992D21E34B009B0811 /* Roll'dUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			productName = Rolld;
+			productReference = 9FEF861345D9AA77F96B8AF3 /* Rolld.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C6997F732D21E34A009B0811 /* Project object */ = {
+		3E9268166C3DA9D6A4894EAA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				BuildIndependentTargetsInParallel = YES;
 				TargetAttributes = {
-					C6997F7A2D21E34A009B0811 = {
-						CreatedOnToolsVersion = 16.0;
-					};
-					C6997F8E2D21E34B009B0811 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = C6997F7A2D21E34A009B0811;
-					};
-					C6997F982D21E34B009B0811 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = C6997F7A2D21E34A009B0811;
+					40F8B663333D26E29187D8DA = {
+						TestTargetID = AF7C02EDF57B9D92F185CA82;
 					};
 				};
 			};
-			buildConfigurationList = C6997F762D21E34A009B0811 /* Build configuration list for PBXProject "Roll'd" */;
+			buildConfigurationList = 2D5B67DC01CFCA53FADF9E7C /* Build configuration list for PBXProject "Roll'd" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
-			mainGroup = C6997F722D21E34A009B0811;
-			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-			);
-			preferredProjectObjectVersion = 77;
-			productRefGroup = C6997F7C2D21E34A009B0811 /* Products */;
+			mainGroup = 98ED4A5A546E17C63F3DA78D;
+			productRefGroup = B37D99355A73E0C7BBAB50A0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C6997F7A2D21E34A009B0811 /* Roll'd */,
-				C6997F8E2D21E34B009B0811 /* Roll'dTests */,
-				C6997F982D21E34B009B0811 /* Roll'dUITests */,
+				AF7C02EDF57B9D92F185CA82 /* Rolld */,
+				40F8B663333D26E29187D8DA /* RolldUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C6997F792D21E34A009B0811 /* Resources */ = {
+		F25ABB18431DC18CAF5010E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6997F8D2D21E34B009B0811 /* Resources */ = {
+		FE0B739BFD300AE74BE61BF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6997F972D21E34B009B0811 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				7703301F781C80F360913C60 /* Assets.xcassets in Resources */,
+				EC63F090A12254434C6F9F83 /* LaunchScreen.storyboard in Resources */,
+				2EC221A7333CC406D3FBF747 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C6997F772D21E34A009B0811 /* Sources */ = {
+		567C80B2F0A2F6BDD34830D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6997F8B2D21E34B009B0811 /* Sources */ = {
+		8D677CD38C9CB784AF9547CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C6997F952D21E34B009B0811 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				0F86A497B79431A233625B19 /* TuistAssets+Rolld.swift in Sources */,
+				D2E5667C28A01BC7C36074A9 /* TuistBundle+Rolld.swift in Sources */,
+				C65C3983637758580D2D9C9E /* RouletteWheelView.swift in Sources */,
+				2F77C7FF25DD7D5831C9109F /* RouletteWheelViewModel.swift in Sources */,
+				04F888ACD21C2B54D5318D07 /* ArrowIndicator.swift in Sources */,
+				DEB22D362492FEA34D018BB7 /* Segment.swift in Sources */,
+				4C2611032E503BB085B824DE /* Colors.swift in Sources */,
+				1CC3FBA9D3EE6EAA164F78D5 /* NavigationCoordinator.swift in Sources */,
+				5405A08ED52EDE3C97FF7040 /* Screens.swift in Sources */,
+				72713DFF14847F7E37A50DBD /* CGVector+Extensions.swift in Sources */,
+				B420F4C48BA377DDBDD6006E /* Color+Extensions.swift in Sources */,
+				1651B95E65EBE67AFE53A549 /* UIColor+Extensions.swift in Sources */,
+				51D527D3088FF9B34D0ABB79 /* RolldApp.swift in Sources */,
+				285EE658F923370627466D37 /* DareResultView.swift in Sources */,
+				268A836377C8BCC374208B11 /* DareSelectionView.swift in Sources */,
+				23418166615BEF548619DC9A /* DareSelectionViewModel.swift in Sources */,
+				6AB4014E3103C23BFCAEC310 /* DiceScene.swift in Sources */,
+				C055A01FF07FD54F6A3C5012 /* DiceView.swift in Sources */,
+				3AB111EEB8BFF7D1C89CE127 /* HomePage.swift in Sources */,
+				AFCAA7514127A7F5CB970F70 /* PlayerSelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C6997F912D21E34B009B0811 /* PBXTargetDependency */ = {
+		54207A97F3BFED6883F6A44A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C6997F7A2D21E34A009B0811 /* Roll'd */;
-			targetProxy = C6997F902D21E34B009B0811 /* PBXContainerItemProxy */;
-		};
-		C6997F9B2D21E34B009B0811 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C6997F7A2D21E34A009B0811 /* Roll'd */;
-			targetProxy = C6997F9A2D21E34B009B0811 /* PBXContainerItemProxy */;
+			name = Rolld;
+			target = AF7C02EDF57B9D92F185CA82 /* Rolld */;
+			targetProxy = 114579BA5EFA6E5D09010702 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		C6997FA32D21E34B009B0811 /* Debug */ = {
+		165345D728D098202052EFF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Roll'd/Resources/Rolld.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Roll'd/Preview Content\"";
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Roll'd/Resources/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Roll'd";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolld;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/RolldUnitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolldTests;
+				PRODUCT_NAME = RolldUnitTests;
+				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				XROS_DEPLOYMENT_TARGET = 2.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolld.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rolld";
+				TEST_TARGET_NAME = Rolld;
 			};
 			name = Debug;
 		};
-		C6997FA42D21E34B009B0811 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Roll'd/Resources/Rolld.entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Roll'd/Preview Content\"";
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Roll'd/Resources/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Roll'd";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
-				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
-				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
-				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolld;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				XROS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		C6997FA52D21E34B009B0811 /* Debug */ = {
+		192BB744FB59DB452C36DE8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -403,13 +510,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "${SOURCE_ROOT}/Roll'd/Resources/Rolld.entitlements";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -423,24 +529,102 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "${SOURCE_ROOT}/Roll'd/Resources/Info.plist";
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		C6997FA62D21E34B009B0811 /* Release */ = {
+		1FBE9F3322B3C662A9FF1A20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U25YC5NJV2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/Rolld-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolld;
+				PRODUCT_NAME = Rolld;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		39D58DE73C361C3F036B4672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = U25YC5NJV2;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/Rolld-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolld;
+				PRODUCT_NAME = Rolld;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		4322892DFDAB1C23FD981C86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/RolldUnitTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jenix.rolldTests;
+				PRODUCT_NAME = RolldUnitTests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rolld.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Rolld";
+				TEST_TARGET_NAME = Rolld;
+			};
+			name = Release;
+		};
+		E29CC83DF5AE04514C88AB56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -466,13 +650,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "${SOURCE_ROOT}/Roll'd/Resources/Rolld.entitlements";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -480,144 +663,43 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "${SOURCE_ROOT}/Roll'd/Resources/Info.plist";
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-			};
-			name = Release;
-		};
-		C6997FA82D21E34B009B0811 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jenix.Roll-dTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Roll'd.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Roll'd";
-				XROS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		C6997FA92D21E34B009B0811 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jenix.Roll-dTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Roll'd.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Roll'd";
-				XROS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		C6997FAB2D21E34B009B0811 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jenix.Roll-dUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = "Roll'd";
-				XROS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		C6997FAC2D21E34B009B0811 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U25YC5NJV2;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.jenix.Roll-dUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = "Roll'd";
-				XROS_DEPLOYMENT_TARGET = 2.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C6997F762D21E34A009B0811 /* Build configuration list for PBXProject "Roll'd" */ = {
+		2D5B67DC01CFCA53FADF9E7C /* Build configuration list for PBXProject "Roll'd" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C6997FA52D21E34B009B0811 /* Debug */,
-				C6997FA62D21E34B009B0811 /* Release */,
+				192BB744FB59DB452C36DE8F /* Debug */,
+				E29CC83DF5AE04514C88AB56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C6997FA22D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'd" */ = {
+		4E4C2A902711C8EF615F908E /* Build configuration list for PBXNativeTarget "Rolld" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C6997FA32D21E34B009B0811 /* Debug */,
-				C6997FA42D21E34B009B0811 /* Release */,
+				39D58DE73C361C3F036B4672 /* Debug */,
+				1FBE9F3322B3C662A9FF1A20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C6997FA72D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'dTests" */ = {
+		8F225890C5041A1B0956EC81 /* Build configuration list for PBXNativeTarget "RolldUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C6997FA82D21E34B009B0811 /* Debug */,
-				C6997FA92D21E34B009B0811 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C6997FAA2D21E34B009B0811 /* Build configuration list for PBXNativeTarget "Roll'dUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C6997FAB2D21E34B009B0811 /* Debug */,
-				C6997FAC2D21E34B009B0811 /* Release */,
+				165345D728D098202052EFF2 /* Debug */,
+				4322892DFDAB1C23FD981C86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C6997F732D21E34A009B0811 /* Project object */;
+	rootObject = 3E9268166C3DA9D6A4894EAA /* Project object */;
 }
