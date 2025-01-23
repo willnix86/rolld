@@ -106,13 +106,15 @@ struct RouletteWheelView: View {
                 }
             )
         }
-//        .onAppear {
-//            // TODO: Remove dummy names!
-//            ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
-//                vm.newColorName = $0
-//                vm.addNewItem()
-//            }
-//        }
+        .onAppear {
+            // TODO: Remove dummy names!
+            if vm.names.isEmpty {
+                ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
+                    vm.newColorName = $0
+                    vm.addNewItem()
+                }
+            }
+        }
     }
 
     func angleForSegment(_ index: Int) -> Angle {

@@ -14,7 +14,6 @@ final class DareSelectionViewModel: ObservableObject {
     )
     @Published var isSpinning: Bool = false
     @Published var hasSpunAgain: Bool = false
-    @Published var navigateToDiceView: Bool = false
 
     // TODO: remove hardcoded values
     var dares = [
@@ -58,8 +57,17 @@ final class DareSelectionViewModel: ObservableObject {
     
     private var timers: [Timer?] = Array(repeating: nil, count: 6)
     private var hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
-    
-    func onAppear() {
+
+    private var coordinator: NavigationCoordinator?
+    private var playerName: String?
+
+    func onAppear(
+        coordinator: NavigationCoordinator,
+        playerName: String
+    ) {
+        self.coordinator = coordinator
+        self.playerName = playerName
+
         prepareHaptics()
         selectDares()
     }
@@ -71,7 +79,14 @@ final class DareSelectionViewModel: ObservableObject {
     }
     
     func rollTheDice() {
-        navigateToDiceView = true
+        guard let coordinator = coordinator, let playerName = playerName else {
+            // TODO: Error handling
+            return
+        }
+        coordinator.push(.diceRollView(
+            playerName: playerName,
+            dares: dares
+        ))
     }
 
     private func selectDares() {

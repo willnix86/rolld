@@ -308,20 +308,6 @@ class DiceScene: SKScene {
         let text = dares[selectedFaceIndex - 1]
 
         onDareSelected(text)
-//        let dareLabel = SKLabelNode()
-//
-//        dareLabel.text = text
-//        dareLabel.fontSize = 28
-//        dareLabel.verticalAlignmentMode = .center
-//        dareLabel.fontColor = Colors.red.uiColor
-//        dareLabel.position = CGPoint(x: frame.midX, y: frame.height / 3)
-//        addChild(dareLabel)
-
-//        let dare = dareLabel.multilined()
-//        dare.position = CGPoint(x: frame.midX, y: frame.height / 3)
-//        dare.zPosition = 1001  // On top of all other nodes
-
-//        addChild(dare)
     }
 
 #if DEBUG
