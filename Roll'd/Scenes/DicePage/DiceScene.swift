@@ -24,11 +24,7 @@ class DiceScene: SKScene {
     private var accelerationHistory: [Double] = []
     private let historySize = 10 // Number of samples to smooth over
 
-
-#if DEBUG
     private var stopRollingWorkItem: DispatchWorkItem?
-#endif
-
     private let motionManager = CMMotionManager()
     private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
