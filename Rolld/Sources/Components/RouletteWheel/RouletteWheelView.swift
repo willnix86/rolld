@@ -108,7 +108,8 @@ struct RouletteWheelView: View {
         }
         .onAppear {
             // TODO: Remove dummy names!
-            if vm.names.isEmpty {
+            if vm.names.first(where: { $0 ==
+                "" }) != nil {
                 ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
                     vm.newColorName = $0
                     vm.addNewItem()
