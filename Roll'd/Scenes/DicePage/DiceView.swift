@@ -2,6 +2,8 @@ import SwiftUI
 import SpriteKit
 
 struct DiceView: View {
+    @Environment(NavigationCoordinator.self) var coordinator: NavigationCoordinator
+
     @State var selectedDare = ""
     @State var showDareAlert = false
 
@@ -19,18 +21,21 @@ struct DiceView: View {
                 "",
                 isPresented: $showDareAlert,
                 actions: {
-                    
+                    Button("Challenge accepted") {
+                        coordinator.push(.dareResult(playerName: playerName, dare: selectedDare))
+                    }
                 },
                 message: {
                     Text(selectedDare)
                 }
             )
 
-        }.ignoresSafeArea(.all)
-        
+        }
+        .ignoresSafeArea(.all)
+        .navigationBarHidden(true)
     }
 
-    func getScene(size: CGSize) -> SKScene {
+    private func getScene(size: CGSize) -> SKScene {
         let scene = DiceScene(
             size: size,
             playerName: playerName,
@@ -46,12 +51,15 @@ struct DiceView: View {
 }
 
 #Preview {
-    DiceView(playerName: "Will", dares: [
-        "Do the dishes",
-        "Feed the pets",
-        "Take out the trash",
-        "Mow the lawn",
-        "Vacuum the floors",
-        "Wipe down kitchen counters"
-    ])
+    DiceView(
+        playerName: "Will",
+        dares: [
+            "Do the dishes",
+            "Feed the pets",
+            "Take out the trash",
+            "Mow the lawn",
+            "Vacuum the floors",
+            "Wipe down kitchen counters"
+        ]
+    )
 }

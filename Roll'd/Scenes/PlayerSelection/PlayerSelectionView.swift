@@ -1,20 +1,19 @@
 import SwiftUI
 
 struct PlayerSelectionView: View {
-    @State var playerName: String = ""
-    @State var navigateToDareSelection: Bool = false
+    @Environment(NavigationCoordinator.self) var coordinator: NavigationCoordinator
 
     var body: some View {
-        RouletteWheelView() { name in
-            guard name != "" else { return }
-            playerName = name
-            navigateToDareSelection = true
-        }
-            .navigationDestination(
-                isPresented: $navigateToDareSelection
-            ) {
-                DareSelectionView(playerName: playerName)
+        ZStack {
+            Colors.orange.color
+                .ignoresSafeArea()
+            
+            RouletteWheelView() { name in
+                guard name != "" else { return }
+                coordinator.push(.dareSelection(playerName: name))
             }
+        }
+        .navigationBarHidden(true)
     }
 }
 #Preview {
