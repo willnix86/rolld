@@ -11,7 +11,7 @@ final class RouletteWheelViewModel: ObservableObject {
     @Published var usedColors: [Color] = [.blue]
     @Published var colors: [Color] = [.gray.opacity(0.3)]
     @Published var usedColorNames: [Color] = [.blue]
-    @Published var names: [String] = [""]
+    @Published var availableNames: [String] = [""]
     @Published var winningColor: [String] = []
     @Published var newColorName: String = ""
 
@@ -20,6 +20,17 @@ final class RouletteWheelViewModel: ObservableObject {
     var availableColors: [Color] = [.red, .orange, .yellow, .green, .blue, .indigo, .purple]
     let totalSpinDuration: Double = 5.0
     let totalRotations: Double = 3500
+
+    private var names: [String] = []
+    private var hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+
+    func onAppear(namesToExclude: [String]) {
+        if !namesToExclude.isEmpty {
+            availableNames = names.filter { !namesToExclude.contains($0) }
+            segmentCount = availableNames.count
+        }
+        hapticGenerator.prepare()
+    }
 
     func spinRoulette() {
         guard !isSpinning else { return }
@@ -62,15 +73,19 @@ final class RouletteWheelViewModel: ObservableObject {
 
     func addNewItem() {
         guard !newColorName.isEmpty else { return }
+        availableNames.removeAll(where: { $0 == "" })
         addNewColorAndName(name: newColorName)
-        names.removeAll(where: { $0 == "" })
-        segmentCount = names.count
+        segmentCount = availableNames.count
         newColorName = ""
     }
 
     func deleteItems(at offset: IndexSet) {
+        let playersToDelete = offset.map { names[$0] }
+
         names.remove(atOffsets: offset)
-        segmentCount -= 1
+        availableNames.removeAll { playersToDelete.contains($0) }
+
+        segmentCount = availableNames.count
         if names.isEmpty {
             names = [""]
             segmentCount = 1
@@ -86,6 +101,7 @@ final class RouletteWheelViewModel: ObservableObject {
             usedColors.append(nextColor)
             lastUsedColor = nextColor
             names.append(name)
+            availableNames.append(name)
         } else {
             // If `lastUsedColor` is not in `availableColors`, start from the first color
             let firstColor = availableColors.first ?? .gray
@@ -93,6 +109,12 @@ final class RouletteWheelViewModel: ObservableObject {
             usedColors.append(firstColor)
             lastUsedColor = firstColor
             names.append(name)
+            availableNames.append(name)
         }
+    }
+
+    func reset() {
+        availableNames = names
+        segmentCount = availableNames.count
     }
 }
