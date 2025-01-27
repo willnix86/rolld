@@ -10,6 +10,7 @@ struct HomePage: View {
 
             VStack {
                 Text("Welcome to Dice Game")
+                    .foregroundStyle(.black)
                     .font(.largeTitle)
                     .padding()
 

@@ -1,22 +1,22 @@
 import SwiftUI
 
-final class DareSelectionViewModel: ObservableObject {
+final class ForfeitSelectionViewModel: ObservableObject {
     private enum Constants {
-        static let numberOfDares: Int = 6
-        static let animationDelay: CGFloat = 0.7
+        static let numberOfForfeits: Int = 6
+        static let animationDelay: CGFloat = 0.5
         static let animationInterval: CGFloat = 0.1
-        static let minAnimationDuration: Double = 2.0
+        static let minAnimationDuration: Double = 1.5
     }
     
-    @Published var selectedDares: [String] = Array(
+    @Published var selectedForfeits: [String] = Array(
         repeating: "",
-        count: Constants.numberOfDares
+        count: Constants.numberOfForfeits
     )
     @Published var isSpinning: Bool = false
     @Published var hasSpunAgain: Bool = false
 
     // TODO: remove hardcoded values
-    var dares = [
+    var forfeits = [
         "Sing a song as loud as you can.",
         "Do a silly dance for 30 seconds.",
         "Walk across the room like a crab.",
@@ -58,56 +58,40 @@ final class DareSelectionViewModel: ObservableObject {
     private var timers: [Timer?] = Array(repeating: nil, count: 6)
     private var hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
-    private var coordinator: NavigationCoordinator?
     private var playerName: String?
 
-    func onAppear(
-        coordinator: NavigationCoordinator,
-        playerName: String
-    ) {
-        self.coordinator = coordinator
+    func onAppear(playerName: String) {
         self.playerName = playerName
-
         prepareHaptics()
-        selectDares()
+        selectForfeits()
     }
     
-    func spinAgain() {
+    func didTapSpinAgain() {
         guard !hasSpunAgain else { return }
         hasSpunAgain = true
-        selectDares()
-    }
-    
-    func rollTheDice() {
-        guard let coordinator = coordinator, let playerName = playerName else {
-            // TODO: Error handling
-            return
-        }
-        coordinator.push(.diceRollView(
-            playerName: playerName,
-            dares: dares
-        ))
+        selectForfeits()
     }
 
-    private func selectDares() {
+    private func selectForfeits() {
         isSpinning = true
 
-        // Create a mutable copy of dares to track remaining dares
-        var remainingDares = dares.shuffled()
+        // Create a mutable copy of forfeits to track remaining forfeits
+        var remainingForfeits = forfeits.shuffled()
 
-        for i in 0 ..< Constants.numberOfDares {
+        for i in 0 ..< Constants.numberOfForfeits {
             timers[i] = Timer.scheduledTimer(
                 withTimeInterval: Constants.animationInterval,
                 repeats: true
             ) { [weak self] timer in
                 guard let self = self else { return }
 
-                // Update current dare
-                var nextDare = remainingDares.randomElement() ?? ""
-                while nextDare == self.selectedDares[i] {
-                    nextDare = remainingDares.randomElement() ?? ""
+                // Update current forfeit
+                var nextForfeit = remainingForfeits.randomElement() ?? ""
+                while nextForfeit == self.selectedForfeits[i] {
+                    nextForfeit = remainingForfeits.randomElement() ?? ""
                 }
-                self.selectedDares[i] = nextDare
+                self.selectedForfeits[i] = nextForfeit
+                self.hapticGenerator.impactOccurred()
             }
 
             let delay = Double(i) * Constants.animationDelay
@@ -119,11 +103,11 @@ final class DareSelectionViewModel: ObservableObject {
 
                 self.timers[i]?.invalidate()
 
-                if !remainingDares.isEmpty {
-                    self.selectedDares[i] = remainingDares.removeFirst()
+                if !remainingForfeits.isEmpty {
+                    self.selectedForfeits[i] = remainingForfeits.removeFirst()
                 }
 
-                if i == Constants.numberOfDares - 1 {
+                if i == Constants.numberOfForfeits - 1 {
                     self.isSpinning = false
                 }
             }

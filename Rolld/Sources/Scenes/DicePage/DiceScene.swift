@@ -13,7 +13,7 @@ class DiceScene: SKScene {
     private var challengeLabel: SKLabelNode
     private var dice: SKSpriteNode
     private var playerName: String
-    private var dares: [String]
+    private var items: [String]
     private var selectedFaceIndex: Int = 1
 
     private var needsManualReset = false
@@ -28,17 +28,17 @@ class DiceScene: SKScene {
     private let motionManager = CMMotionManager()
     private let hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
 
-    private let onDareSelected: (String) -> Void
+    private let onItemSelected: (String) -> Void
 
     init(
         size: CGSize,
         playerName: String,
-        dares: [String],
-        onDareSelected: @escaping (String) -> Void
+        items: [String],
+        onItemSelected: @escaping (String) -> Void
     ) {
         self.playerName = playerName
-        self.dares = dares
-        self.onDareSelected = onDareSelected
+        self.items = items
+        self.onItemSelected = onItemSelected
 
         self.instructionLabel = SKLabelNode()
         self.challengeLabel = SKLabelNode()
@@ -301,9 +301,9 @@ class DiceScene: SKScene {
     }
 
     private func presentChallenge() {
-        let text = dares[selectedFaceIndex - 1]
+        let text = items[selectedFaceIndex - 1]
 
-        onDareSelected(text)
+        onItemSelected(text)
     }
 
 #if DEBUG

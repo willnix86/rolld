@@ -21,6 +21,12 @@ final class RouletteWheelViewModel: ObservableObject {
     let totalSpinDuration: Double = 5.0
     let totalRotations: Double = 3500
 
+    private var hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+
+    func onAppear() {
+        hapticGenerator.prepare()
+    }
+
     func spinRoulette() {
         guard !isSpinning else { return }
         isSpinning = true

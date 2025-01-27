@@ -3,6 +3,7 @@ import SwiftData
 
 @main
 struct RolldApp: App {
+    @State private var appState = AppState()
     @State private var coordinator = NavigationCoordinator(initialScreen: .home)
 
     //    var sharedModelContainer: ModelContainer = {
@@ -27,6 +28,7 @@ struct RolldApp: App {
                     }
             }
             .environment(coordinator)
+            .environment(appState)
         }
         //        .modelContainer(sharedModelContainer)
     }

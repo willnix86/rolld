@@ -1,7 +1,7 @@
 import SwiftUI
 
 @Observable
-class NavigationCoordinator {
+final class NavigationCoordinator {
     var paths = NavigationPath()
     private var screenStack: [Screens] = [] // Keeps track of the screen stack
 
@@ -15,13 +15,13 @@ class NavigationCoordinator {
         case .home:
             HomePage()
         case .playerSelection:
-            PlayerSelectionView()
-        case .dareSelection(let name):
-            DareSelectionView(playerName: name)
-        case .diceRollView(let name, let dares):
-            DiceView(playerName: name, dares: dares)
-        case .dareResult(let name, let dare):
-            DareResultView(playerName: name, dareText: dare)
+            RouletteWheelView()
+        case .dare:
+            DareView()
+        case .forfeitSelection:
+            ForfeitSelectionView()
+        case .dice(let forfeits):
+            DiceView(forfeits: forfeits)
         }
     }
 

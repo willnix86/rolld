@@ -6,7 +6,8 @@ extension InfoPlist {
             with: [
                 "CFBundleVersion": "1.0",
                 "UILaunchStoryboardName": "Launch Screen",
-                "UIBackgroundModes": "remote-notification"
+                "UIBackgroundModes": "remote-notification",
+                "ITSAppUsesNonExemptEncryption": false
             ]
         )
     }

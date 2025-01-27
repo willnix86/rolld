@@ -3,12 +3,12 @@ import SpriteKit
 
 struct DiceView: View {
     @Environment(NavigationCoordinator.self) var coordinator: NavigationCoordinator
+    @Environment(AppState.self) var appState: AppState
 
-    @State var selectedDare = ""
-    @State var showDareAlert = false
+    @State var selectedForfeit = ""
+    @State var showForfeitAlert = false
 
-    var playerName: String
-    var dares: [String]
+    var forfeits: [String]
 
     var body: some View {
         GeometryReader { proxy in
@@ -19,14 +19,19 @@ struct DiceView: View {
             }
             .alert(
                 "",
-                isPresented: $showDareAlert,
+                isPresented: $showForfeitAlert,
                 actions: {
                     Button("Challenge accepted") {
-                        coordinator.push(.dareResult(playerName: playerName, dare: selectedDare))
+                        guard !appState.currentPlayer.isEmpty else {
+                            return
+                        }
+
+                        appState.addToPreviousPlayers(appState.currentPlayer)
+                        coordinator.popTo(.playerSelection)
                     }
                 },
                 message: {
-                    Text(selectedDare)
+                    Text(selectedForfeit)
                 }
             )
 
@@ -38,11 +43,11 @@ struct DiceView: View {
     private func getScene(size: CGSize) -> SKScene {
         let scene = DiceScene(
             size: size,
-            playerName: playerName,
-            dares: dares
-        ) { dare in
-            selectedDare = dare
-            showDareAlert = true
+            playerName: appState.currentPlayer,
+            items: forfeits
+        ) { item in
+            selectedForfeit = item
+            showForfeitAlert = true
         }
         scene.scaleMode = .aspectFit
 
@@ -52,8 +57,7 @@ struct DiceView: View {
 
 #Preview {
     DiceView(
-        playerName: "Will",
-        dares: [
+        forfeits: [
             "Do the dishes",
             "Feed the pets",
             "Take out the trash",
