@@ -10,7 +10,6 @@ enum DiceCollisionCategory: UInt32 {
 
 class DiceScene: SKScene {
     private var instructionLabel: SKLabelNode
-    private var challengeLabel: SKLabelNode
     private var dice: SKSpriteNode
     private var playerName: String
     private var items: [String]
@@ -40,8 +39,7 @@ class DiceScene: SKScene {
         self.items = items
         self.onItemSelected = onItemSelected
 
-        self.instructionLabel = SKLabelNode()
-        self.challengeLabel = SKLabelNode()
+        self.instructionLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
 
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
@@ -145,7 +143,7 @@ class DiceScene: SKScene {
     }
 
     private func applyImpulseToDice() {
-        let impulseMagnitude: CGFloat = 1000
+        let impulseMagnitude: CGFloat = 1250
 
         var dx = CGFloat.random(in: -impulseMagnitude...impulseMagnitude)
         var dy = CGFloat.random(in: -impulseMagnitude...impulseMagnitude)
@@ -201,8 +199,8 @@ class DiceScene: SKScene {
         let normalizedSpeed = min(max(speed / maxSpeed, 0), 1)
 
         // Map normalized speed to the interval range
-        let minInterval: TimeInterval = 0.05 // Fastest interval
-        let maxInterval: TimeInterval = 0.5  // Slowest interval
+        let minInterval: TimeInterval = 0.01 // Fastest interval
+        let maxInterval: TimeInterval = 0.15  // Slowest interval
         let interval = maxInterval - (normalizedSpeed * (maxInterval - minInterval))
 
         // Check if enough time has passed to update the dice face
@@ -255,7 +253,7 @@ class DiceScene: SKScene {
         }
 
         stopRollingWorkItem = newWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0, execute: newWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: newWorkItem)
     }
 
     private func stopRollingDice() {

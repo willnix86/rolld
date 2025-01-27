@@ -11,16 +11,49 @@ struct RouletteWheelView: View {
             Colors.orange.color
                 .ignoresSafeArea()
             VStack(spacing: 30) {
-                RouletteWheel(
-                    segmentCount: $viewModel.segmentCount,
-                    items: $viewModel.names,
-                    colors: $viewModel.colors,
-                    rotation: $viewModel.rotation,
-                    size: 300
-                ) {
-                    viewModel.spinRoulette()
+                if viewModel.availableNames.count >= 1 &&
+                    state.previousPlayers.count < state.allPlayers.count {
+                    RouletteWheel(
+                        segmentCount: $viewModel.segmentCount,
+                        items: $viewModel.availableNames,
+                        colors: $viewModel.colors,
+                        rotation: $viewModel.rotation,
+                        size: 300
+                    ) {
+                        if viewModel.availableNames.count > 1 {
+                            viewModel.spinRoulette()
+                        } else {
+                            guard let name = viewModel.availableNames.first else {
+                                return
+                            }
+                            viewModel.winningItem = name
+                            viewModel.showAlert = true
+                        }
+                    }
+                } else {
+                    VStack {
+                        Spacer()
+                        Button(
+                            action: {
+                                state.reset()
+                                viewModel.reset()
+                            },
+                            label: {
+                                Text("Play again!").bold()
+                                    .padding(.horizontal)
+                                    .frame(height: 55)
+                                    .foregroundStyle(.white)
+                                    .background(
+                                        .green,
+                                        in: .rect(cornerRadius: 12)
+                                    )
+                            }
+                        )
+                        Spacer()
+                    }
+                    .frame(height: 300)
                 }
-                
+
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Enter name:")
                         .font(.title3)
@@ -61,16 +94,19 @@ struct RouletteWheelView: View {
                         .padding(.horizontal, 10)
                         .padding(.bottom, 10)
 
-                    if viewModel.names.filter({ $0 != ""}).isEmpty == false {
+                    if state.allPlayers.filter({ $0 != ""}).isEmpty == false {
                         List {
-                            ForEach(viewModel.names, id: \.self) { name in
+                            ForEach(state.allPlayers, id: \.self) { name in
                                 Text(name)
                                     .listRowBackground(
                                         Color.white.opacity(0.5)
                                     )
                                     .foregroundStyle(.black)
                             }
-                            .onDelete(perform: viewModel.deleteItems)
+                            .onDelete(perform: {
+                                viewModel.deleteItems(at: $0)
+                                state.deletePlayers(at: $0)
+                            })
                         }
                         .listStyle(.plain)
                     }
@@ -90,13 +126,14 @@ struct RouletteWheelView: View {
                 )
             }
             .onAppear {
-                viewModel.onAppear()
+                viewModel.onAppear(namesToExclude: state.previousPlayers)
                 // TODO: Remove dummy names!
-                if viewModel.names.first(where: { $0 ==
+                if viewModel.availableNames.first(where: { $0 ==
                     "" }) != nil {
                     ["Henry", "John", "Mary", "James", "Robert", "William", "Michael", "David", "Joseph", "Thomas"].forEach {
                         viewModel.newColorName = $0
                         viewModel.addNewItem()
+                        state.addNewPlayer($0)
                     }
                 }
             }

@@ -11,9 +11,14 @@ struct ForfeitSelectionView: View {
             Colors.orange.color
                 .ignoresSafeArea()
             
-            VStack(spacing: 20) {
-                Text("Forfeit")
+            VStack {
+                Text("Choose a forfeit or let the dice choose for you!")
                     .foregroundStyle(.black)
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Spacer()
 
                 ForEach(0..<6, id: \.self) { index in
                     Button(action: didTapForfeit) {
@@ -27,15 +32,15 @@ struct ForfeitSelectionView: View {
                             .background(Colors.red.color)
                             .cornerRadius(10)
                             .multilineTextAlignment(.leading)
+                            .fixedSize(
+                                horizontal: false,
+                                vertical: true
+                            )
+
                     }
                 }
-                
+
                 Spacer()
-
-                if !viewModel.isSpinning {
-
-                    Text("Choose a forfeit or let the dice choose for you!")
-                        .foregroundStyle(.black)
 
                     HStack {
                         Button(action: didTapRollTheDice) {
@@ -47,9 +52,9 @@ struct ForfeitSelectionView: View {
                                 .cornerRadius(10)
                         }
                         .opacity(
-                            viewModel.isSpinning || viewModel.hasSpunAgain ? 0.5 : 1
+                            viewModel.isSpinning ? 0.5 : 1
                         )
-                        .disabled(viewModel.isSpinning || viewModel.hasSpunAgain)
+                        .disabled(viewModel.isSpinning)
 
                         Button(action: viewModel.didTapSpinAgain) {
                             Text("Spin Again")
@@ -64,8 +69,6 @@ struct ForfeitSelectionView: View {
                         )
                         .disabled(viewModel.isSpinning || viewModel.hasSpunAgain)
                     }
-                    .padding(.bottom)
-                }
 
             }
             .padding()
@@ -89,12 +92,17 @@ struct ForfeitSelectionView: View {
     }
 
     private func didTapRollTheDice() {
-        coordinator.popTo(
+        coordinator.push(
             .dice(forfeits: viewModel.selectedForfeits)
         )
     }
 }
 
 #Preview {
+    var coordinator = NavigationCoordinator(initialScreen: .forfeitSelection)
+    var state = AppState()
+
     ForfeitSelectionView()
+        .environment(coordinator)
+        .environment(state)
 }

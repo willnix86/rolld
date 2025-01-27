@@ -21,7 +21,7 @@ struct DiceView: View {
                 "",
                 isPresented: $showForfeitAlert,
                 actions: {
-                    Button("Challenge accepted") {
+                    Button("OK!") {
                         guard !appState.currentPlayer.isEmpty else {
                             return
                         }
@@ -56,14 +56,19 @@ struct DiceView: View {
 }
 
 #Preview {
-    DiceView(
-        forfeits: [
-            "Do the dishes",
-            "Feed the pets",
-            "Take out the trash",
-            "Mow the lawn",
-            "Vacuum the floors",
-            "Wipe down kitchen counters"
-        ]
-    )
+    let forfeits = [
+        "Do the dishes",
+        "Feed the pets",
+        "Take out the trash",
+        "Mow the lawn",
+        "Vacuum the floors",
+        "Wipe down kitchen counters"
+    ]
+
+    var coordinator = NavigationCoordinator(initialScreen: .dice(forfeits: forfeits))
+    var state = AppState()
+
+    DiceView(forfeits: forfeits)
+    .environment(coordinator)
+    .environment(state)
 }

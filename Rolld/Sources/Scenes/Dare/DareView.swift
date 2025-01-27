@@ -6,68 +6,78 @@ struct DareView: View {
     @StateObject private var viewModel = DareViewModel()
 
     var body: some View {
-        ZStack {
-            Colors.orange.color
-                .ignoresSafeArea()
-            VStack(spacing: 30) {
-                // Player's Name
-                Text("\(appState.currentPlayer)'s Dare")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-                    .foregroundColor(.black)
-                
-                // Dare Text
-                Text(viewModel.selectedDare)
-                    .font(.system(size: 14))
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 70)
-                    .background(Colors.red.color)
-                    .cornerRadius(10)
-                    .multilineTextAlignment(.leading)
+        GeometryReader { proxy in
+            ZStack {
+                Colors.orange.color
+                    .ignoresSafeArea()
 
-                Spacer()
+                VStack {
+                    VStack(spacing: 30) {
+                        // Player's Name
+                        Text("\(appState.currentPlayer)'s Dare")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .padding()
+                            .foregroundColor(.black)
 
-                if !viewModel.isSpinning {
-                    // Buttons
-                    VStack(spacing: 20) {
-                        // Challenge Complete Button
-                        Button(action: didTapChallengeSucceeded) {
-                            Text("Challenge Complete")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                        Spacer()
+
+                        // Dare Text
+                        Text(viewModel.selectedDare)
+                            .font(.system(size: 14))
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color.white)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 70)
+                            .background(Colors.red.color)
+                            .cornerRadius(10)
+                            .multilineTextAlignment(.leading)
+
+                        Spacer()
+
+                        if !viewModel.isSpinning {
+                            // Buttons
+                            VStack(spacing: 20) {
+                                // Challenge Complete Button
+                                Button(action: didTapChallengeSucceeded) {
+                                    Text("Dare Complete")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundColor(.white)
+                                        .background(Color.green)
+                                        .cornerRadius(10)
+                                }
+
+                                Button(action: didTapChallengeFailed) {
+                                    Text("Dare Failed")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundColor(.white)
+                                        .background(Color.red)
+                                        .cornerRadius(10)
+                                }
+                            }
+                            .padding()
+                            .frame(height: 150)
+                        } else {
+                            Spacer()
                                 .padding()
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.white)
-                                .background(Color.green)
-                                .cornerRadius(10)
-                        }
-
-                        Button(action: didTapChallengeFailed) {
-                            Text("Challenge Failed")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.white)
-                                .background(Color.red)
-                                .cornerRadius(10)
+                                .frame(height: 150)
                         }
                     }
-                    .padding()
-
-                    Spacer()
                 }
+                .padding()
             }
-            .padding()
+            .onAppear {
+                viewModel.onAppear()
+            }
+            .navigationBarHidden(true)
         }
-        .onAppear {
-            viewModel.onAppear()
-        }
-        .navigationBarHidden(true)
     }
 
     private func didTapChallengeSucceeded() {
@@ -84,5 +94,10 @@ struct DareView: View {
 }
 
 #Preview {
+    var coordinator = NavigationCoordinator(initialScreen: .dare)
+    var state = AppState()
+
     DareView()
+        .environment(coordinator)
+        .environment(state)
 }
