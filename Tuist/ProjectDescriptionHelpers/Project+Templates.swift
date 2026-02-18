@@ -18,7 +18,8 @@ extension Project {
             organizationName: Constants.organizationName,
             settings: .settings(
                 base: [
-                    "SWIFT_STRICT_CONCURRENCY": "targeted"
+                    "SWIFT_STRICT_CONCURRENCY": "targeted",
+                    "DEVELOPMENT_TEAM": "U25YC5NJV2"
                 ]
             ),
             targets: projectTargets

@@ -14,6 +14,11 @@ final class ForfeitSelectionViewModel: ObservableObject {
     )
     @Published var isSpinning: Bool = false
     @Published var hasSpunAgain: Bool = false
+    @Published var lockedIndices: Set<Int> = []
+    @Published var cardScales: [CGFloat] = Array(
+        repeating: 1.0,
+        count: Constants.numberOfForfeits
+    )
 
     // TODO: remove hardcoded values
     var forfeits = [
@@ -74,6 +79,8 @@ final class ForfeitSelectionViewModel: ObservableObject {
 
     private func selectForfeits() {
         isSpinning = true
+        lockedIndices = []
+        cardScales = Array(repeating: 1.0, count: Constants.numberOfForfeits)
 
         // Create a mutable copy of forfeits to track remaining forfeits
         var remainingForfeits = forfeits.shuffled()
@@ -105,6 +112,13 @@ final class ForfeitSelectionViewModel: ObservableObject {
 
                 if !remainingForfeits.isEmpty {
                     self.selectedForfeits[i] = remainingForfeits.removeFirst()
+                }
+
+                // Lock-in bounce effect
+                self.lockedIndices.insert(i)
+                self.cardScales[i] = 1.05
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
+                    self?.cardScales[i] = 1.0
                 }
 
                 if i == Constants.numberOfForfeits - 1 {

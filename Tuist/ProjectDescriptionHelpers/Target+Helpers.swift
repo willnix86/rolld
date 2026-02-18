@@ -4,7 +4,7 @@ extension Target {
     private enum Constants {
         static let destinations: Destinations = Set([.iPhone])
 
-        static let deploymentTarget: DeploymentTargets = DeploymentTargets.iOS("17.6")
+        static let deploymentTarget: DeploymentTargets = DeploymentTargets.iOS("17.0")
     }
 
     // MARK: App
@@ -26,7 +26,7 @@ extension Target {
             name: "\(name)Tests",
             product: .unitTests,
             bundleId: "\(Project.Constants.organizationName).\(name.lowercased())Tests",
-            sources: ["RolldTests/\(name)/**"],
+            sources: ["\(name)Tests/**"],
             dependencies: [.target(name: name)]
         )
         return [mainTarget, testTarget]

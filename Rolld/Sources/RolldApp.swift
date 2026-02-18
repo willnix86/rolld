@@ -1,23 +1,9 @@
 import SwiftUI
-import SwiftData
 
 @main
 struct RolldApp: App {
     @State private var appState = AppState()
     @State private var coordinator = NavigationCoordinator(initialScreen: .home)
-
-    //    var sharedModelContainer: ModelContainer = {
-    //        let schema = Schema([
-    //            Item.self,
-    //        ])
-    //        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-    //
-    //        do {
-    //            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-    //        } catch {
-    //            fatalError("Could not create ModelContainer: \(error)")
-    //        }
-    //    }()
 
     var body: some Scene {
         WindowGroup {
@@ -29,7 +15,7 @@ struct RolldApp: App {
             }
             .environment(coordinator)
             .environment(appState)
+            .preferredColorScheme(.dark)
         }
-        //        .modelContainer(sharedModelContainer)
     }
 }

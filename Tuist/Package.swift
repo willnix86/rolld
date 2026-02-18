@@ -7,7 +7,7 @@ import struct ProjectDescription.PackageSettings
 
 let baseSettings = Settings.settings(
     base: [
-        "IPHONEOS_DEPLOYMENT_TARGET": "17.6"
+        "IPHONEOS_DEPLOYMENT_TARGET": "17.0"
     ],
     debug: [:],
     release: [:],

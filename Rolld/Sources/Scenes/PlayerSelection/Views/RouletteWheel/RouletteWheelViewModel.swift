@@ -2,27 +2,58 @@ import Combine
 import Foundation
 import SwiftUI
 
+// MARK: - Haptic Feedback Protocol
+
+protocol HapticFeedbackProvider {
+    func prepare()
+    func impactOccurred()
+}
+
+extension UIImpactFeedbackGenerator: HapticFeedbackProvider {}
+
+// MARK: - RouletteWheelViewModel
+
 final class RouletteWheelViewModel: ObservableObject {
     @Published var segmentCount = 1
     @Published var rotation: Double = 0
     @Published var isSpinning = false
     @Published var winningItem: String = ""
     @Published var showAlert = false
-    @Published var usedColors: [Color] = [.blue]
-    @Published var colors: [Color] = [.gray.opacity(0.3)]
-    @Published var usedColorNames: [Color] = [.blue]
+    @Published var usedColors: [Color] = [Theme.wheelColors.first ?? .blue]
+    @Published var colors: [Color] = [Theme.Background.surface]
+    @Published var usedColorNames: [Color] = [Theme.wheelColors.first ?? .blue]
     @Published var availableNames: [String] = [""]
     @Published var winningColor: [String] = []
     @Published var newColorName: String = ""
 
-    var selectedColor: Color = .blue
+    var selectedColor: Color = Theme.wheelColors.first ?? .blue
     var lastUsedColor: Color = .clear
-    var availableColors: [Color] = [.red, .orange, .yellow, .green, .blue, .indigo, .purple]
-    let totalSpinDuration: Double = 5.0
-    let totalRotations: Double = 3500
+    var availableColors: [Color] = Theme.wheelColors
+
+    // MARK: - Physics Constants
+
+    private let friction: Double = 0.98
+    private let stopThreshold: Double = 5.0
+    private let tapSpinVelocityRange: ClosedRange<Double> = 1600...2000
+    private let hapticMinInterval: TimeInterval = 0.04 // 40ms, max 25/sec
+
+    // MARK: - Animation State
+
+    private var animationTimer: Timer?
+    private var angularVelocity: Double = 0
+    private var lastHapticTime: TimeInterval = 0
+    private var lastSegmentIndex: Int = -1
 
     private var names: [String] = []
-    private var hapticGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private var hapticGenerator: HapticFeedbackProvider
+
+    // MARK: - Init
+
+    init(hapticProvider: HapticFeedbackProvider? = nil) {
+        self.hapticGenerator = hapticProvider ?? UIImpactFeedbackGenerator(style: .light)
+    }
+
+    // MARK: - Lifecycle
 
     func onAppear(namesToExclude: [String]) {
         if !namesToExclude.isEmpty {
@@ -32,44 +63,119 @@ final class RouletteWheelViewModel: ObservableObject {
         hapticGenerator.prepare()
     }
 
+    func invalidateTimer() {
+        animationTimer?.invalidate()
+        animationTimer = nil
+    }
+
+    // MARK: - Spin (Tap)
+
     func spinRoulette() {
         guard !isSpinning else { return }
         isSpinning = true
 
-        // Normalize the current rotation to 0–360 degrees
-        let currentRotation = rotation.truncatingRemainder(dividingBy: 360)
-        let normalizedRotation = currentRotation < 0 ? currentRotation + 360 : currentRotation
+        let velocity = Double.random(in: tapSpinVelocityRange)
+        angularVelocity = velocity
+        lastSegmentIndex = segmentIndexForRotation(rotation)
+        startAnimationTimer()
+    }
 
-        // Add random extra rotations and calculate total target rotation
-        let randomExtraRotations = Double.random(in: 3...5) * 360
-        let totalTargetRotation = randomExtraRotations + normalizedRotation
+    // MARK: - Drag Support
 
-        // Update the rotation value to spin
-        withAnimation(Animation.timingCurve(0.1, 0.8, 0.3, 1.0, duration: totalSpinDuration)) {
-            rotation += totalTargetRotation
-        }
+    func applyDragDelta(_ angleDelta: Double) {
+        guard !isSpinning else { return }
 
-        // Determine the winning item based on the final wheel position
-        DispatchQueue.main.asyncAfter(deadline: .now() + totalSpinDuration) { [weak self] in
-            guard let self = self else { return }
+        let oldRotation = rotation
+        rotation += angleDelta
+        checkSegmentCrossing(oldRotation: oldRotation, newRotation: rotation)
+    }
 
-            // Calculate the final rotation and normalize to 0–360
-            let finalRotation = self.rotation.truncatingRemainder(dividingBy: 360)
-            let normalizedFinalRotation = finalRotation < 0 ? finalRotation + 360 : finalRotation
+    func startDecelerationSpin(angularVelocity velocity: Double) {
+        guard !isSpinning else { return }
+        isSpinning = true
 
-            // Calculate the winning index based on the segment angle
-            let segmentAngle = 360.0 / Double(self.segmentCount)
-            let adjustedRotation = 360.0 - normalizedFinalRotation // Adjust for clockwise rotation
-            let winningIndex = Int(adjustedRotation / segmentAngle) % self.segmentCount
+        angularVelocity = velocity
+        lastSegmentIndex = segmentIndexForRotation(rotation)
+        startAnimationTimer()
+    }
 
-            // Update the winning item
-            self.winningItem = self.names[winningIndex]
+    // MARK: - Segment Index (Pure, Testable)
 
-            // Finish spinning
-            self.isSpinning = false
-            self.showAlert = true
+    func segmentIndexForRotation(_ rotationDegrees: Double) -> Int {
+        guard segmentCount > 0 else { return 0 }
+
+        let segmentAngle = 360.0 / Double(segmentCount)
+
+        // Normalize to 0–360
+        var normalized = rotationDegrees.truncatingRemainder(dividingBy: 360)
+        if normalized < 0 { normalized += 360 }
+
+        // Arrow points right (0 degrees). Clockwise rotation means segment index decreases.
+        let adjusted = 360.0 - normalized
+        return Int(adjusted / segmentAngle) % segmentCount
+    }
+
+    // MARK: - Animation Timer
+
+    private func startAnimationTimer() {
+        invalidateTimer()
+
+        let dt = 1.0 / 60.0
+        animationTimer = Timer.scheduledTimer(withTimeInterval: dt, repeats: true) { [weak self] _ in
+            self?.animationTick(dt: dt)
         }
     }
+
+    private func animationTick(dt: Double) {
+        let oldRotation = rotation
+
+        rotation += angularVelocity * dt
+        angularVelocity *= friction
+
+        checkSegmentCrossing(oldRotation: oldRotation, newRotation: rotation)
+
+        if abs(angularVelocity) < stopThreshold {
+            stopSpin()
+        }
+    }
+
+    // MARK: - Segment Crossing + Haptics
+
+    private func checkSegmentCrossing(oldRotation: Double, newRotation: Double) {
+        let oldIndex = segmentIndexForRotation(oldRotation)
+        let newIndex = segmentIndexForRotation(newRotation)
+
+        if oldIndex != newIndex {
+            lastSegmentIndex = newIndex
+            fireSegmentHaptic()
+        }
+    }
+
+    private func fireSegmentHaptic() {
+        let now = ProcessInfo.processInfo.systemUptime
+        guard now - lastHapticTime >= hapticMinInterval else { return }
+
+        lastHapticTime = now
+        hapticGenerator.impactOccurred()
+    }
+
+    // MARK: - Stop Spin
+
+    private func stopSpin() {
+        invalidateTimer()
+        angularVelocity = 0
+
+        // Determine winner from final position
+        let winningIndex = segmentIndexForRotation(rotation)
+        if winningIndex < availableNames.count {
+            winningItem = availableNames[winningIndex]
+        }
+
+        isSpinning = false
+        showAlert = true
+    }
+
+    // MARK: - Add / Delete / Reset
 
     func addNewItem() {
         guard !newColorName.isEmpty else { return }
@@ -114,6 +220,8 @@ final class RouletteWheelViewModel: ObservableObject {
     }
 
     func reset() {
+        invalidateTimer()
+        angularVelocity = 0
         availableNames = names
         segmentCount = availableNames.count
     }

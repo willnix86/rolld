@@ -9,6 +9,7 @@ final class DareViewModel: ObservableObject {
     @Published var selectedDare: String = ""
     @Published var isSpinning: Bool = false
     @Published var hasSpunAgain: Bool = false
+    @Published var shuffleScale: CGFloat = 1.0
 
     // TODO: remove hardcoded values
     var dares = [
@@ -76,6 +77,10 @@ final class DareViewModel: ObservableObject {
                 nextDare = remainingDares.randomElement() ?? ""
             }
             self.selectedDare = nextDare
+            self.shuffleScale = 1.05
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { [weak self] in
+                self?.shuffleScale = 1.0
+            }
             self.hapticGenerator.impactOccurred()
         }
 

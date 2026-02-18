@@ -6,35 +6,40 @@ struct DiceView: View {
     @Environment(AppState.self) var appState: AppState
 
     @State var selectedForfeit = ""
-    @State var showForfeitAlert = false
+    @State var showForfeitOverlay = false
 
     var forfeits: [String]
 
     var body: some View {
         GeometryReader { proxy in
-            VStack {
-                SpriteView(
-                    scene: getScene(size: proxy.size)
-                )
-            }
-            .alert(
-                "",
-                isPresented: $showForfeitAlert,
-                actions: {
-                    Button("OK!") {
+            ZStack {
+                VStack {
+                    SpriteView(
+                        scene: getScene(size: proxy.size)
+                    )
+                }
+
+                // Dice result overlay
+                GameOverlay(isPresented: $showForfeitOverlay) {
+                    Text("Your Forfeit")
+                        .font(Typography.headingMedium)
+                        .foregroundStyle(Theme.Text.secondary)
+
+                    Text(selectedForfeit)
+                        .font(Typography.bodyLarge)
+                        .foregroundStyle(Theme.Text.primary)
+                        .multilineTextAlignment(.center)
+
+                    Button("Let's go!") {
                         guard !appState.currentPlayer.isEmpty else {
                             return
                         }
-
                         appState.addToPreviousPlayers(appState.currentPlayer)
                         coordinator.popTo(.playerSelection)
                     }
-                },
-                message: {
-                    Text(selectedForfeit)
+                    .buttonStyle(PrimaryButtonStyle())
                 }
-            )
-
+            }
         }
         .ignoresSafeArea(.all)
         .navigationBarHidden(true)
@@ -47,7 +52,7 @@ struct DiceView: View {
             items: forfeits
         ) { item in
             selectedForfeit = item
-            showForfeitAlert = true
+            showForfeitOverlay = true
         }
         scene.scaleMode = .aspectFit
 

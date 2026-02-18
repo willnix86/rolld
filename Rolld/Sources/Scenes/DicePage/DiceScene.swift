@@ -39,7 +39,7 @@ class DiceScene: SKScene {
         self.items = items
         self.onItemSelected = onItemSelected
 
-        self.instructionLabel = SKLabelNode(fontNamed: "AvenirNext-Bold")
+        self.instructionLabel = SKLabelNode(fontNamed: ".AppleSystemUIFontRounded-Bold")
 
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
@@ -47,7 +47,7 @@ class DiceScene: SKScene {
 
         super.init(size: size)
 
-        self.backgroundColor = Colors.orange.uiColor
+        self.backgroundColor = Theme.UIColors.background
     }
     
     override func didMove(to view: SKView) {
@@ -69,7 +69,7 @@ class DiceScene: SKScene {
     private func presentInstructions() {
         instructionLabel.text = "\(playerName), let's roll!"
         instructionLabel.fontSize = 28
-        instructionLabel.fontColor = Colors.red.uiColor
+        instructionLabel.fontColor = Theme.UIColors.coral
         instructionLabel.position = CGPoint(x: frame.midX, y: frame.height / 3)
 
         addChild(instructionLabel)
@@ -285,7 +285,7 @@ class DiceScene: SKScene {
 
         instructionLabel.text = "Drumroll please..."
         instructionLabel.fontSize = 28
-        instructionLabel.fontColor = Colors.red.uiColor
+        instructionLabel.fontColor = Theme.UIColors.amber
 
         addChild(instructionLabel)
 
