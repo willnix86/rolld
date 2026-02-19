@@ -10,6 +10,7 @@ enum DiceCollisionCategory: UInt32 {
 
 class DiceScene: SKScene {
     private var instructionLabel: SKLabelNode
+    private var hintLabel: SKLabelNode
     private var dice: SKSpriteNode
     private var playerName: String
     private var items: [String]
@@ -40,6 +41,7 @@ class DiceScene: SKScene {
         self.onItemSelected = onItemSelected
 
         self.instructionLabel = SKLabelNode(fontNamed: ".AppleSystemUIFontRounded-Bold")
+        self.hintLabel = SKLabelNode(fontNamed: ".AppleSystemUIFontRounded-Semibold")
 
         let d6 = GKRandomDistribution.d6()
         let face = d6.nextInt()
@@ -72,7 +74,14 @@ class DiceScene: SKScene {
         instructionLabel.fontColor = Theme.UIColors.coral
         instructionLabel.position = CGPoint(x: frame.midX, y: frame.height / 3)
 
+        hintLabel.text = "Shake your phone!"
+        hintLabel.fontSize = 18
+        hintLabel.fontColor = .white
+        hintLabel.alpha = 0.6
+        hintLabel.position = CGPoint(x: frame.midX, y: frame.height / 3 - 36)
+
         addChild(instructionLabel)
+        addChild(hintLabel)
     }
 
     private func presentDice() {
@@ -230,6 +239,7 @@ class DiceScene: SKScene {
         guard !needsManualReset else { return }
 
         instructionLabel.removeFromParent()
+        hintLabel.removeFromParent()
 
         stopRollingWorkItem?.cancel() // Cancel any scheduled stop
         stopRollingWorkItem = nil

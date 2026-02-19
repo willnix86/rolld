@@ -28,7 +28,8 @@ final class NavigationCoordinator {
     func setRootScreen(_ screen: Screens) {
         screenStack = [screen]
         paths = NavigationPath()
-        paths.append(screen)
+        // Root view is rendered by NavigationStack's view builder — NOT the path.
+        // Appending it to paths would push a duplicate on top.
     }
 
     func push(_ screen: Screens) {
@@ -37,7 +38,8 @@ final class NavigationCoordinator {
     }
 
     func pop() {
-        if !screenStack.isEmpty {
+        // Keep at least the root screen in screenStack
+        if screenStack.count > 1 {
             screenStack.removeLast()
             paths.removeLast()
         }
@@ -45,20 +47,25 @@ final class NavigationCoordinator {
 
     func popTo(_ screen: Screens) {
         guard let index = screenStack.firstIndex(of: screen) else {
-            print("Screen not found in stack.")
+            print("ENDIDEBUG: Screen not found in stack.")
             return
         }
 
-        screenStack.removeLast(screenStack.count - index - 1)
+        let itemsToRemove = screenStack.count - index - 1
+        guard itemsToRemove > 0 else { return }
 
+        screenStack.removeLast(itemsToRemove)
+
+        // Rebuild paths from non-root items only (root is the NavigationStack's view builder)
         paths = NavigationPath()
-        for screen in screenStack {
+        for screen in screenStack.dropFirst() {
             paths.append(screen)
         }
     }
 
     func popToRoot() {
         guard let rootScreen = screenStack.first else { return }
-        setRootScreen(rootScreen)
+        screenStack = [rootScreen]
+        paths = NavigationPath()
     }
 }
